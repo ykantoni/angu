@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8080/api/users';
+  private apiUrl = 'http://localhost:8080/users';
   constructor(private http: HttpClient) {}
   getUsers(): Observable<string> {
     return this.http.get(this.apiUrl, { responseType: 'text' });

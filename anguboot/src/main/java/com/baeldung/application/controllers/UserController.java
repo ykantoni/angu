@@ -3,6 +3,8 @@ package com.baeldung.application.controllers;
 import com.baeldung.application.entities.User;
 import com.baeldung.application.repositories.UserRepository;
 import java.util.List;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +21,14 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
+    //@GetMapping("/users")
+    //public List<User> getUsers() {
+//        return (List<User>) userRepository.findAll();
+//    }
+
     @GetMapping("/users")
-    public List<User> getUsers() {
-        return (List<User>) userRepository.findAll();
+    public ResponseEntity<String> getUsers() {
+        return ResponseEntity.ok("Hello from Spring Boot!");
     }
 
     @PostMapping("/users")
