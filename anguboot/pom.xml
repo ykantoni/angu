@@ -11,7 +11,7 @@
 
 <!--
     <parent>
-        <groupId>com.baeldung.spring-boot-modules</groupId>
+        <groupId>com.anguboot.spring-boot-modules</groupId>
         <artifactId>spring-boot-modules</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
