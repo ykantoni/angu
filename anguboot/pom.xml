@@ -65,7 +65,7 @@
     </build>
 
     <properties>
-        <start-class>com.baeldung.application.Application</start-class>
+        <start-class>com.anguboot.Application</start-class>
     </properties>
 
 </project>

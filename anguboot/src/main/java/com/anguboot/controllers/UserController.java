@@ -1,8 +1,7 @@
-package com.baeldung.application.controllers;
+package com.anguboot.controllers;
 
-import com.baeldung.application.entities.User;
-import com.baeldung.application.repositories.UserRepository;
-import java.util.List;
+import com.anguboot.entities.User;
+import com.anguboot.repositories.UserRepository;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

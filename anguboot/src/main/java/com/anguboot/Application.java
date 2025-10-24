@@ -1,7 +1,7 @@
-package com.baeldung.application;
+package com.anguboot;
 
-import com.baeldung.application.entities.User;
-import com.baeldung.application.repositories.UserRepository;
+import com.anguboot.entities.User;
+import com.anguboot.repositories.UserRepository;
 import java.util.stream.Stream;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

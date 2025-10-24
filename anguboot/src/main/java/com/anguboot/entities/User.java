@@ -1,4 +1,4 @@
-package com.baeldung.application.entities;
+package com.anguboot.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
