@@ -41,4 +41,7 @@ public class UserController {
     void addUser(@RequestBody User user) {
         userRepository.save(user);
     }
+
+    public record LoginRequest(String username, String password) {}
+    public record AuthResponse(String token) {}
 }
