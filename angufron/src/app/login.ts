@@ -10,11 +10,14 @@ import {FormsModule} from '@angular/forms';
     FormsModule
   ],
   template: `
+    <section>
     <form (submit)="submit()">
       <input [(ngModel)]="username" name="username" required/>
       <input [(ngModel)]="password" name="password" type="password" required/>
       <button type="submit">Login</button>
-    </form>`
+    </form>
+    </section>`
+
 })
 export class LoginComponent {
   username = ''; password = '';

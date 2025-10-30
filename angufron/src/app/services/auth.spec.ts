@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private base = 'http://localhost:8080/api/auth';
+  private base = 'http://localhost:8080';
   constructor(private http: HttpClient) {}
   login(username: string, password: string) {
     return this.http.post<{ token: string }>(`${this.base}/login`, { username, password })

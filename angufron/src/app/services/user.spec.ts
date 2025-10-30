@@ -7,6 +7,8 @@ export interface User {
   id: number;
   username: string;
   email: string;
+  role: string;
+  enabled: boolean;
   // add other fields as needed
 }
 
