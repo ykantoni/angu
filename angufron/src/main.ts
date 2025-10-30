@@ -1,12 +1,21 @@
-import { provideHttpClient } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {TokenInterceptor} from './app/services/token.interceptor';
-import { App } from './app/app';
+import { provideRouter } from '@angular/router';
+import { importProvidersFrom } from '@angular/core';
+import { AuthGuardClass } from './app/auth.guard';
 
-bootstrapApplication(App, {
-providers: [
-  provideHttpClient(),
-  { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
-],
-}).catch((err) => console.error(err));
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppComponent } from './app/app.component';
+import { appRoutes } from './app/app.routes';
+import { AuthInterceptor } from './app/auth.interceptor';
+//import { provideForms } from '@angular/forms';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(appRoutes),
+    importProvidersFrom(HttpClientModule),
+//    provideForms(),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    AuthGuardClass
+  ]
+});
+
