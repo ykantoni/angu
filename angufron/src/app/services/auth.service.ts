@@ -8,7 +8,7 @@ interface LoginRes { token: string }
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private api = 'http://localhost:8080/login';
+  private api = 'http://localhost:8080';
   private key = 'jwt_token_v1';
 
   constructor(private http: HttpClient) {}

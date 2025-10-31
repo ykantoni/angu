@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   message: string | null = null;
   constructor(private http: HttpClient) {}
   ngOnInit() {
-    this.http.get<{ message: string }>('http://localhost:8080/api/protected')
+    this.http.get<{ message: string }>('http://localhost:8080/allusers')
       .subscribe({
         next: res => this.message = res.message,
         error: () => this.message = 'Could not load protected resource'
