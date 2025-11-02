@@ -38,8 +38,7 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
-    private Set<String> roles;
-
+    private Set<String> roles = Set.of("ROLE_operator");
 
     @Override
     public String toString() {
