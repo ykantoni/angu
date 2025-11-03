@@ -1,6 +1,6 @@
 import api from "./axios";
 
-export type LoginResponse = { accessToken: string };
+export type LoginResponse = { token: string };
 
 export async function login(username: string, password: string): Promise<LoginResponse> {
     const res = await api.post<LoginResponse>("/login", { username, password });

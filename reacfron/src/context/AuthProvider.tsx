@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     async function signin(username: string, password: string) {
         const data = await apiLogin(username, password);
-        setAccess(data.accessToken);
+        setAccess(data.token);
     }
 
     async function signout() {

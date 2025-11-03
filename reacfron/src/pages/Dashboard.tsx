@@ -10,7 +10,7 @@ export default function Dashboard() {
         let mounted = true;
         async function load() {
             try {
-                const res = await api.get("/protected");
+                const res = await api.get("/allusers");
                 if (mounted) setMessage(res.data.message || "Protected data loaded");
             } catch {
                 if (mounted) setMessage("Failed to load protected data");
