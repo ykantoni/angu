@@ -58,7 +58,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthFilter) throws Exception {
-        http.cors(Customizer.withDefaults())
+        http
+
                 .csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(au -> {
                 au.requestMatchers("/login").permitAll()
                     .requestMatchers("/ping").permitAll()
