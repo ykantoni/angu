@@ -1,45 +1,41 @@
 import { Injectable } from '@angular/core';
 import {
-  HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpErrorResponse
+  HttpEvent,
+  HttpInterceptor,
+  HttpHandler,
+  HttpRequest
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { AuthService } from './services/auth.service';
-import { catchError } from 'rxjs/operators';
+import { Observable, from } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { KeycloakService } from './services/keycloak.service';
+import { environment } from './environment';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private auth: AuthService) {}
+  private isKeycloakUrl(url: string): boolean {
+    const base = environment.keycloak.url.replace(/\/+$/, '');
+    return url.startsWith(base);
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = this.auth.getToken();
-    let cloned = req;
-    if (token) {
-      const newHeaders = req.headers.set('X-My-Header', 'value');
-      console.log(req.headers)
-      console.log(newHeaders)
-      let authReq = req.clone({
-        headers: req.headers.append('Authorization', 'Bearer '+token )
-      });
-      authReq.headers.append('Authorization', 'Bearer '+token )
-      return next.handle(authReq).pipe(
-        catchError((err: HttpErrorResponse) => {
-          if (err.status === 401) {
-            // simple global 401 handler: clear token and redirect to login
-            this.auth.logout();
-            location.href = '/login';
-          }
-          return throwError(() => err);
-        })
-      );
+    // Skip if not our API or is Keycloak endpoints (avoid leaking token unnecessarily)
+    const shouldAttach =
+      !this.isKeycloakUrl(req.url) &&
+      (req.url.startsWith(environment.apiBase) || /^[./]/.test(req.url));
+
+    if (!shouldAttach) {
+      return next.handle(req);
     }
-    return next.handle(cloned).pipe(
-      catchError((err: HttpErrorResponse) => {
-        if (err.status === 401) {
-          // simple global 401 handler: clear token and redirect to login
-          this.auth.logout();
-          location.href = '/login';
+
+    return from(KeycloakService.updateToken(30)).pipe(
+      switchMap(() => {
+        const token = KeycloakService.getToken();
+        if (token) {
+          req = req.clone({
+            setHeaders: { Authorization: `Bearer ${token}` }
+          });
         }
-        return throwError(() => err);
+        return next.handle(req);
       })
     );
   }

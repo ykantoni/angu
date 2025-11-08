@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
-import { AuthService } from './services/auth.service';
+import { CanActivate } from '@angular/router';
+import { KeycloakService } from './services/keycloak.service';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuardClass implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
-  canActivate(): boolean {
-    if (this.auth.isLoggedIn()) return true;
-    this.router.navigate(['/login']);
-    return false;
+export class AuthGuard implements CanActivate {
+  async canActivate(): Promise<boolean> {
+    if (KeycloakService.isLoggedIn()) return true;
+    await KeycloakService.login();
+    return false; // navigation will occur after login redirect back
   }
 }
