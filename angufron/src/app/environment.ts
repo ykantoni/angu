@@ -5,7 +5,7 @@ export const environment = {
     // For modern Keycloak (>=17) root path is usually without /auth in issuer; adapter still needs base URL.
     url: 'http://localhost:18080', // Keycloak base (gateway / reverse proxy if any)
     realm: 'nokia',
-    clientId: 'apt'
+    clientId: 'UI'
   },
   // Spring Boot resource server base (port 8080 in example below)
   apiBase: 'http://localhost:8888'

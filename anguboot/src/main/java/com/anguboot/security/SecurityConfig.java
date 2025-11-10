@@ -26,6 +26,7 @@ public class SecurityConfig {
                     cfg.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
                     cfg.setAllowedHeaders(List.of("*"));
                     cfg.setAllowCredentials(true);
+                    cfg.setMaxAge(3600L);
                     return cfg;
                 }))
                 .csrf(csrf -> csrf.disable())
